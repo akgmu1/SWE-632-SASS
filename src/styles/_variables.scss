@@ -1,0 +1,16 @@
+@use 'functions' as *;
+
+$primary: rgb(48, 19, 192);
+$bg-color: rgb(213, 215, 225);
+$fg-color: rgb(28, 29, 39);
+
+// The configurable font sizes
+$font-base: rem(16);
+$font-scale: 1.25;
+
+// Generate different variables depending on the font size
+$font-sm: $font-base / $font-scale;
+$font-md: $font-base;
+$font-lg: $font-base * $font-scale;
+$font-xlg: $font-lg * $font-scale;
+$font-2xl: $font-xlg * $font-scale;

@@ -1,7 +1,10 @@
 // Normalize CSS to be consistent across browser
 // From: https://github.com/sindresorhus/modern-normalize
 @import 'modern-normalize.css';
+@import 'index.scss';
 
 html {
-  background: white;
+  font-size: $font-base;
+  background-color: $bg-color;
+  color: $fg-color;
 }

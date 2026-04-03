@@ -6,7 +6,7 @@ const list = ref([1, 2, 3, 4, 5])
 
 <template>
   <main>
-    <div class="header">Hello</div>
+    <header>Hello</header>
     <div class="items">
       <div v-for="x in list">
         <div class="item">{{ x }}</div>
@@ -16,10 +16,15 @@ const list = ref([1, 2, 3, 4, 5])
 </template>
 
 <style lang="scss" scoped>
-@use '@/assets/_mixins.scss' as *;
+@use '@/styles' as *;
 
-.header {
-  font-size: 5rem;
+header {
+  font-size: $font-2xl;
+  background-color: $primary;
+  color: $bg-color;
+  margin-bottom: rem(20);
+  padding-bottom: rem(10);
+  text-align: center;
 }
 
 .items {
@@ -28,14 +33,14 @@ const list = ref([1, 2, 3, 4, 5])
 }
 
 .item {
-  font-size: 1rem;
-  background-color: blue;
-  color: white;
-  border-radius: 1rem;
+  background-color: $fg-color;
+  color: $bg-color;
+  border-radius: rem(5);
   padding: 0.5rem;
 
   &:hover {
-    background-color: aquamarine;
+    background-color: $primary;
+    color: $bg-color;
   }
 }
 </style>
