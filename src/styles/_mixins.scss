@@ -3,3 +3,14 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin transition-color {
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+@mixin round {
+  border-radius: 0.25rem;
+}

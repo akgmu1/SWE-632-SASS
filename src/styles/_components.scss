@@ -1,0 +1,72 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'functions' as *;
+@use 'mixins' as *;
+
+// A not clean example of sass, but gets the point across kinda
+
+$btn-pad-y: 0.5rem;
+$btn-pad-x: 1rem;
+$btn-border: 0.125rem;
+$btn-border-radius: 0.5rem;
+
+//
+// Regular button
+//
+
+@mixin btn-theme($btn-fg-color, $btn-bg-color) {
+  background-color: $btn-bg-color;
+  color: $btn-fg-color;
+
+  &:hover {
+    background-color: color.adjust($btn-bg-color, $lightness: -10%);
+  }
+
+  &:active {
+    background-color: color.adjust($btn-bg-color, $lightness: 2%);
+  }
+}
+
+.btn {
+  padding: $btn-pad-y $btn-pad-x;
+  border: none;
+  border-radius: $btn-border-radius;
+  cursor: pointer;
+  @include transition-color;
+  @include round;
+
+  @include btn-theme($fg-color, color.adjust($bg-color, $lightness: -10%));
+}
+
+.btn-primary {
+  @include btn-theme($bg-color, $primary-color);
+}
+
+//
+// Outlined button
+//
+
+@mixin btn-outline-theme($btn-border-color) {
+  background: transparent;
+  color: $btn-border-color;
+  border: $btn-border solid $btn-border-color;
+  border-radius: $btn-border-radius;
+
+  &:hover {
+    background-color: color.adjust($bg-color, $lightness: -30%);
+    border-color: color.adjust($bg-color, $lightness: -30%);
+  }
+
+  &:active {
+    background-color: color.adjust($bg-color, $lightness: -10%);
+    border-color: color.adjust($bg-color, $lightness: -10%);
+  }
+}
+
+.btn-outline {
+  @include btn-outline-theme($fg-color);
+}
+
+.btn-outline-primary {
+  @include btn-outline-theme($primary-color);
+}
