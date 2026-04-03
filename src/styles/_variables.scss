@@ -9,8 +9,8 @@ $font-base: rem(16);
 $font-scale: 1.25;
 
 // Generate different variables depending on the font size
-$font-sm: $font-base / $font-scale;
+$font-sm: calc($font-base / $font-scale);
 $font-md: $font-base;
-$font-lg: $font-base * $font-scale;
-$font-xlg: $font-lg * $font-scale;
-$font-2xl: $font-xlg * $font-scale;
+$font-lg: calc($font-base * $font-scale);
+$font-xlg: calc($font-lg * $font-scale);
+$font-2xl: calc($font-xlg * $font-scale);

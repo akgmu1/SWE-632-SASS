@@ -1,7 +1,7 @@
 // Normalize CSS to be consistent across browser
 // From: https://github.com/sindresorhus/modern-normalize
-@import 'modern-normalize.css';
-@import 'index.scss';
+@use 'modern-normalize.css' as *;
+@use 'index.scss' as *;
 
 html {
   font-size: $font-base;
