@@ -1,16 +1,39 @@
+@use 'sass:math';
+@use 'sass:color';
 @use 'functions' as *;
 
-$primary-color: rgb(48, 19, 192);
-$bg-color: rgb(213, 215, 225);
-$fg-color: rgb(28, 29, 39);
+// Base Colors
+$bg: rgb(213, 215, 225);
+$bg-alt: rgb(196, 200, 214);
+$fg: rgb(28, 29, 39);
+$default-hover: color.scale($fg, $lightness: 10%);
+$default-active: color.scale($fg, $lightness: 5%);
 
-// The configurable font sizes
+// Primary Colors
+$primary-bg: rgb(47, 51, 165);
+$primary-fg: $bg;
+$primary-hover: color.scale($primary-bg, $lightness: 10%);
+$primary-active: color.scale($primary-bg, $lightness: 5%);
+
+// Secondary Colors
+$secondary-bg: rgb(47, 165, 116);
+$secondary-fg: $bg;
+$secondary-hover: color.scale($secondary-bg, $lightness: 10%);
+$secondary-active: color.scale($secondary-bg, $lightness: 5%);
+
+// Danger Colors
+$danger-bg: rgb(161, 52, 52);
+$danger-fg: $bg;
+$danger-hover: color.scale($danger-bg, $lightness: 10%);
+$danger-active: color.scale($danger-bg, $lightness: 5%);
+
+// Font Configurations
 $font-base: 1rem;
 $font-scale: 1.25;
 
-// Generate different variables depending on the font size
-$font-sm: calc($font-base / $font-scale);
+// Different Font Sizes Based on Configuration
+$font-sm: math.div($font-base, $font-scale);
 $font-md: $font-base;
-$font-lg: calc($font-base * $font-scale);
-$font-xlg: calc($font-lg * $font-scale);
-$font-2xl: calc($font-xlg * $font-scale);
+$font-lg: $font-base * $font-scale;
+$font-xlg: $font-lg * $font-scale;
+$font-2xl: $font-xlg * $font-scale;

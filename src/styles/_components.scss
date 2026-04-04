@@ -1,72 +1,119 @@
 @use 'sass:color';
+@use 'sass:math';
 @use 'variables' as *;
 @use 'functions' as *;
 @use 'mixins' as *;
 
-// A not clean example of sass, but gets the point across kinda
+//
+// Button Variables
+//
 
 $btn-pad-y: 0.5rem;
 $btn-pad-x: 1rem;
-$btn-border: 0.125rem;
-$btn-border-radius: 0.5rem;
+
+$btn-sm-pad-y: 0.25rem;
+$btn-sm-pad-x: 0.5rem;
 
 //
-// Regular button
+// Button Base Theme
 //
 
-@mixin btn-theme($btn-fg-color, $btn-bg-color) {
-  background-color: $btn-bg-color;
-  color: $btn-fg-color;
+@mixin btn-theme($btn-fg: $bg, $btn-bg: $fg, $hover: $default-hover, $active: $default-active) {
+  border: none;
+  background-color: $btn-bg;
+  color: $btn-fg;
 
   &:hover {
-    background-color: color.adjust($btn-bg-color, $lightness: -10%);
+    background-color: $hover;
   }
 
   &:active {
-    background-color: color.adjust($btn-bg-color, $lightness: 2%);
+    background-color: $active;
   }
+}
+
+//
+// Button with Base Theme
+//
+
+%btn-base {
+  cursor: pointer;
+
+  @include transition-color;
+  @include rounded;
+  @include btn-theme;
 }
 
 .btn {
+  @extend %btn-base;
+  font-size: $font-base;
   padding: $btn-pad-y $btn-pad-x;
-  border: none;
-  border-radius: $btn-border-radius;
-  cursor: pointer;
-  @include transition-color;
-  @include round;
-
-  @include btn-theme($fg-color, color.adjust($bg-color, $lightness: -10%));
 }
+
+.btn-sm {
+  @extend %btn-base;
+  font-size: $font-sm;
+  padding: $btn-sm-pad-y $btn-sm-pad-x;
+}
+
+//
+// Button Themed - Primary
+//
 
 .btn-primary {
-  @include btn-theme($bg-color, $primary-color);
+  @include btn-theme($primary-fg, $primary-bg, $primary-hover, $primary-active);
 }
 
 //
-// Outlined button
+// Button Themed - Secondary
 //
 
-@mixin btn-outline-theme($btn-border-color) {
-  background: transparent;
-  color: $btn-border-color;
-  border: $btn-border solid $btn-border-color;
-  border-radius: $btn-border-radius;
+.btn-secondary {
+  @include btn-theme($secondary-fg, $secondary-bg, $secondary-hover, $secondary-active);
+}
 
-  &:hover {
-    background-color: color.adjust($bg-color, $lightness: -30%);
-    border-color: color.adjust($bg-color, $lightness: -30%);
+//
+// Button Themed - Danger
+//
+
+.btn-danger {
+  @include btn-theme($danger-fg, $danger-bg, $danger-hover, $danger-active);
+}
+
+//
+// Form
+//
+%input-base {
+  padding: math.div($btn-pad-y, 2);
+  font-size: $font-base;
+  border: 0.125rem solid $default-active;
+  @include rounded;
+}
+
+.form-group {
+  label {
+    display: block;
+    font-weight: 600;
   }
 
-  &:active {
-    background-color: color.adjust($bg-color, $lightness: -10%);
-    border-color: color.adjust($bg-color, $lightness: -10%);
+  input {
+    @extend %input-base;
+    color: $fg;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-active;
+    }
+
+    &::placeholder {
+      color: #9ca3af;
+    }
   }
 }
 
-.btn-outline {
-  @include btn-outline-theme($fg-color);
-}
-
-.btn-outline-primary {
-  @include btn-outline-theme($primary-color);
+//
+// Text Themed - Danger
+//
+.text-danger {
+  color: $danger-bg;
 }
