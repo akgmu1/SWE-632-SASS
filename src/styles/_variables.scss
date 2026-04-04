@@ -1,11 +1,11 @@
 @use 'sass:math';
 @use 'sass:color';
-@use 'functions' as *;
 
 // Base Colors
 $bg: rgb(213, 215, 225);
 $bg-alt: rgb(196, 200, 214);
 $fg: rgb(28, 29, 39);
+$fg-alt: rgb(94, 97, 122);
 $default-hover: color.scale($fg, $lightness: 10%);
 $default-active: color.scale($fg, $lightness: 5%);
 

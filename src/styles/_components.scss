@@ -88,6 +88,7 @@ $btn-sm-pad-x: 0.5rem;
   font-size: $font-base;
   border: 0.125rem solid $default-active;
   @include rounded;
+  @include transition-color;
 }
 
 .form-group {
@@ -98,6 +99,7 @@ $btn-sm-pad-x: 0.5rem;
 
   input {
     @extend %input-base;
+    background-color: $bg-alt;
     color: $fg;
 
     &:focus {
@@ -106,7 +108,7 @@ $btn-sm-pad-x: 0.5rem;
     }
 
     &::placeholder {
-      color: #9ca3af;
+      color: $fg-alt;
     }
   }
 }
