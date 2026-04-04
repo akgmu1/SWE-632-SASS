@@ -2,6 +2,7 @@
 // From: https://github.com/sindresorhus/modern-normalize
 @use 'modern-normalize.css' as *;
 @use 'index.scss' as *;
+@debug 'Hello World';
 
 html {
   font-size: $font-base;

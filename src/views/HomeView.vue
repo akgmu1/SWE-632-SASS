@@ -1,59 +1,95 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
-const list = ref([1, 2, 3, 4, 5])
+interface Item {
+  id: number
+  value: number
+}
+
+type CreateItem = Omit<Item, 'id'>
+
+let id = 0
+const list: Ref<Item[]> = ref([])
+const input = ref('')
+const error = ref('')
+
+function addItem(item: CreateItem) {
+  list.value.push({
+    ...item,
+    id: id++,
+  })
+}
+
+const DEFAULT_ITEMS = [1, 2, 3, 4, 5] as const
+
+for (const x of DEFAULT_ITEMS) {
+  addItem({ value: x })
+}
 </script>
 
 <template>
   <main>
-    <header>Hello</header>
-    <div
-      class="items"
-      :style="{
-        'margin-bottom': '1rem',
-      }"
-    >
-      <div v-for="x in list">
-        <div class="item">{{ x }}</div>
+    <header>My Application</header>
+    <div>
+      <label> Number </label>
+      <input v-model="input" type="text" placeholder="Enter Number..." />
+      <div v-if="error">
+        {{ error }}
+      </div>
+      <button
+        @click="
+          () => {
+            const x = Number(input)
+            if (input.length > 0 && !Number.isNaN(x)) {
+              addItem({ value: x })
+              input = ''
+              error = ''
+            } else {
+              error = 'Input was not a number or empty'
+            }
+          }
+        "
+      >
+        Add
+      </button>
+    </div>
+    <div>
+      <div v-for="x in list" :key="x.id">
+        <div>{{ x.value }}</div>
+        <button
+          @click="
+            () => {
+              list = list.filter((e) => e.id !== x.id)
+            }
+          "
+        >
+          Remove
+        </button>
       </div>
     </div>
-    <div class="items">
-      <button class="btn btn-outline">Action A</button>
-      <button class="btn btn-primary">Action B</button>
-      <button class="btn btn-outline-primary">Action B</button>
+    <div>
+      <button
+        @click="
+          () => {
+            list = list.sort((a, b) => a.value - b.value)
+          }
+        "
+      >
+        Sort
+      </button>
+      <button
+        @click="
+          () => {
+            list = list.sort(() => Math.random() - 0.5)
+          }
+        "
+      >
+        Randomize
+      </button>
     </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
 @use '@/styles' as *;
-
-header {
-  font-size: $font-2xl;
-  text-align: center;
-
-  background-color: $primary-color;
-  color: $bg-color;
-
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-}
-
-.items {
-  @include flex-center;
-  gap: 1rem;
-}
-
-.item {
-  background-color: $fg-color;
-  color: $bg-color;
-
-  @include round;
-  padding: 0.5rem;
-
-  &:hover {
-    background-color: $primary-color;
-    color: $bg-color;
-  }
-}
 </style>
